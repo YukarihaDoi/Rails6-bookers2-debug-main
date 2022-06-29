@@ -1,25 +1,36 @@
 <table class='table'>
-  <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
-  <tr>
-	  <th>name</th>
-	  <th><%= user.name %></th>
-  </tr>
-  <tr>
-	  <th>introduction</th>
-	  <th><%= user.introduction %></th>
-  </tr>
-  <tr>
-    <th>follow</th>
-    <!--<th>%= user.followings.count %></th>-->
-  </tr>
-  <tr>
-    <th>followers</th>
-    <!--<th>%= user.followers.count %></th>-->
-  </tr>
-</table>
 
-<div class='row'>
+ <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
+ <tr>
+	<th>name</th>
+	<th><%= user.name %></th>
+ </tr>
+
+ <tr>
+	<th>introduction</th>
+	<th><%= user.introduction %></th>
+ </tr>
+
+ <tr>
+  <th>follow</th>
+  <th><%= "フォロー数: #{user.follower.count}" %></th>
+ </tr>
+ <tr>
+  <th>followers</th>
+  <th><%= "フォロワー数: #{user.followed.count}" %></th>
+ </tr>
+
+</table>
+<% unless user == current_user %>
+       <% if current_user.following?(user) %>
+       <%= link_to 'フォロー外す', user_unfollow_path(user), method: :POST %>
+       <% else %>
+       <%= link_to 'フォローする', user_follow_path(user), method: :POST %>
+       <% end %>
+<% end %>
+
+<% if user == current_user %>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
-    <i class="fas fa-user-cog"></i>
+  <i class="fas fa-user-cog"></i>
   <% end %>
-</div>
+<% end %>
