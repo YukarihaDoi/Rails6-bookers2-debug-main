@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get 'relationships/followings'
   get 'relationships/followers'
   get "home/about"=>"homes#about" ,as:"about"
-
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
    resources :post_comments, only: [:create,:destroy]
    resource :favorites, only: [:create, :destroy]
