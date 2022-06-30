@@ -21,15 +21,33 @@
   </thead>
   <tbody>
 
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
+    <% unless user == current_user %>
+
       <tr>
         <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
         <td><%= user.name %></td>
-        <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
         <td>
-      </td>
+        <% if current_user.following?(user) %>
+          <%= link_to 'フォロー外す', user_unfollow_path(current_user, user), method: :POST %>
+        <% else %>
+          <%= link_to 'フォローする', user_follow_path(current_user, user), method: :POST %>
+        <% end %>
+        </td>
+        <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
       </tr>
+    <% else %>
+
+     <tr>
+        <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+        <td><%= user.name %></td>
+        <td>
+        </td>
+        <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
+      </tr>
+
     <% end %>
+  <% end %>
   </tbody>
 </table>
   </div>
