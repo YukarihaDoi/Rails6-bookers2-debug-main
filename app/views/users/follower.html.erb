@@ -1,6 +1,21 @@
 <h1>Follower</h1>
 
 <h2>フォロワー一覧</h2>
-<% @user.followed_user.where.not(id: current_user.id).each do |user| %>
-  </p>
-<% end %>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @user.followed_user.where.not(id: current_user.id).each do |user| %>
+      <tr>
+        <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
+      </tr>
+     <% end %>
+  </tbody>
+</table>
