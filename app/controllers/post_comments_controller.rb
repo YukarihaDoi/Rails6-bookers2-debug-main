@@ -1,5 +1,6 @@
 class PostCommentsController < ApplicationController
 
+# コメント作成
   def create
   book = Book.find(params[:book_id])
   comment = PostComment.new(post_comment_params)
@@ -9,6 +10,7 @@ class PostCommentsController < ApplicationController
   redirect_to book_path(book)
   end
 
+# コメント削除
   def destroy
     PostComment.find(params[:id]).destroy
     redirect_to book_path(params[:book_id])

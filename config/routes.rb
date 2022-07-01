@@ -2,8 +2,13 @@ Rails.application.routes.draw do
 
   root to: "homes#top"
   devise_for :users
+
   get 'relationships/followings'
   get 'relationships/followers'
+
+  get "users/:id/following" => "users#following" ,as:"following"
+  get "users/:id/follower" => "users#follower" ,as:"follower"
+
   get "home/about"=>"homes#about" ,as:"about"
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
    resources :post_comments, only: [:create,:destroy]
