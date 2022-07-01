@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root to: "homes#top"
   devise_for :users
 
@@ -20,5 +19,6 @@ Rails.application.routes.draw do
     post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow'
   end
 
+  get "search" => "searches#search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
