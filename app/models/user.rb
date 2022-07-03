@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -16,6 +15,7 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
+
   # 自分がフォローしてる人
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed
@@ -23,7 +23,8 @@ class User < ApplicationRecord
   # 自分をフォローしている人
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followed_user, through: :followed, source: :follower
-   # フォローする
+
+  # フォローする
   def follow(user_id)
   follower.create(followed_id: user_id)
   end
@@ -38,6 +39,7 @@ class User < ApplicationRecord
   following_user.include?(user)
   end
 
+  # 検索
   def self.search_for(content, method)
     if method == "perfect_match"
       User.where(name:content)

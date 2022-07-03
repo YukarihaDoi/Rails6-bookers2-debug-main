@@ -5,15 +5,12 @@ class Book < ApplicationRecord
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
 
+# いいね確認
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
- # 検索方法分岐(booksテーブル内のカラム名を入れる)
- # ・完全一致→perfect_match
- # ・前方一致→forward_match
- # ・後方一致→backword_match
- # ・部分一致→partial_match
 
+# 検索
   def self.search_for(content, method)
     if method == "perfect_match"
       Book.where(title:content)
