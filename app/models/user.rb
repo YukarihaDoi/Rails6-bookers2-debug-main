@@ -37,28 +37,19 @@ class User < ApplicationRecord
   def following?(user)
   following_user.include?(user)
   end
-  # has_many :xxx, class_name: "モデル名", foreign_key: "○○_id", dependent: :destroy
-  # @user.booksのように、@user.yyyで、そのユーザがフォローしている人orフォローされている人の一覧を出したい
-  # has_many :yyy, through（通じて）: :xxx, source（紐づく）: :zzz
-
-
-  # 検索分岐（usersテーブル内のカラム名を入れる)
-  # ・完全一致→perfect_match
-  # ・前方一致→forward_match
-  # ・後方一致→backword_match
-  # ・部分一致→partial_match
 
   def self.search_for(content, method)
     if method == "perfect_match"
       User.where(name:content)
     elsif method == "forward_match"
-      User.where('name LIKE?',content+'%')
+      User.where('name LIKE ?', content+'%')
     elsif method == "backward_match"
-      User.where('name LIKE?','%'+content)
+      User.where('name LIKE ?', '%'+content)
     elsif method == "partial_match"
-      User.where('name LIKE?','%'+content+'%')
+      User.where('name LIKE ?', '%'+content+'%')
     else
       User.all
     end
   end
 end
+
