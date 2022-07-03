@@ -47,7 +47,7 @@ class User < ApplicationRecord
   # ・前方一致→forward_match
   # ・後方一致→backword_match
   # ・部分一致→partial_match
-  
+
   def self.search_for(content, method)
     if method == "perfect_match"
       User.where(name:content)
@@ -58,8 +58,7 @@ class User < ApplicationRecord
     elsif method == "partial_match"
       User.where('name LIKE?','%'+content+'%')
     else
-      User.where('name LIKE?',content+'%')
+      User.all
     end
   end
-
 end

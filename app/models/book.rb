@@ -13,7 +13,7 @@ class Book < ApplicationRecord
  # ・前方一致→forward_match
  # ・後方一致→backword_match
  # ・部分一致→partial_match
-  
+
   def self.search_for(content, method)
     if method == "perfect_match"
       Book.where(title:content)
@@ -24,7 +24,7 @@ class Book < ApplicationRecord
     elsif method == "partial_match"
       Book.where('title LIKE?','%'+content+'%')
     else
-      Book.where('title LIKE?',content+'%')
+      Book.all
     end
   end
 end
