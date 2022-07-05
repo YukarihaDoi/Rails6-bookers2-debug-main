@@ -34,8 +34,8 @@
         </tr>
       </table>
 
-    <div class= "comment_<%=@post_comments.id %>">
-     <%= render "post_comments/comment", book: @book, post_comment: @post_comment %>
+    <div class = "comments-area">
+        <%= render "post_comments/comment-area", book: @book, post_comment: @post_comment %>
     </div>
 
     </div>

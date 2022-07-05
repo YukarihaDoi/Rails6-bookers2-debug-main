@@ -1,1 +1,1 @@
-$(".comment_<%=@post_comments.id %").html("<%= j(render 'post_comments/comment', book: @book, post_comment: @post_comment) %>");
+$(".comments-area").html("<%= j(render 'post_comments/comment-area', book: @book, post_comment: @post_comment) %>");
