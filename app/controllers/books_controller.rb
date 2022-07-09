@@ -5,15 +5,24 @@ class BooksController < ApplicationController
    @nbook = Book.new
    @book = Book.find(params[:id])
    @post_comment = PostComment.new
+   @user = @book.user
   end
 # 投稿一覧
   def index
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorited_users).
+      sort {|a,b|
+        b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
+        a.favorited_users.includes(:favorites).where(created_at: from...to).size
+      }
     @nbook = Book.new
     # @books = Book.all
-    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> 
-    a.favorited_users.size}
+    # @books = Book.includes(:favorited_users).where(created_at: from...to).sort {|a,b| b.favorited_users.size <=>
+    # a.favorited_users.size}
     @post_comment = PostComment.new
   end
+
 # 投稿作成
   def create
     @nbook = Book.new(book_params)
