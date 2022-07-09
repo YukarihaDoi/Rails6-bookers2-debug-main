@@ -4,13 +4,14 @@ class BooksController < ApplicationController
   def show
    @nbook = Book.new
    @book = Book.find(params[:id])
-   @user = @book.user
    @post_comment = PostComment.new
   end
 # 投稿一覧
   def index
     @nbook = Book.new
-    @books = Book.all
+    # @books = Book.all
+    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> 
+    a.favorited_users.size}
     @post_comment = PostComment.new
   end
 # 投稿作成
