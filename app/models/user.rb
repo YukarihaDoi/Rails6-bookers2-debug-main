@@ -6,8 +6,11 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  # 追加
   has_many :favorited_users, through: :favorites, source: :book
+ 
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+
 
   has_one_attached :profile_image
 
