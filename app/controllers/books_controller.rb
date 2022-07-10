@@ -17,9 +17,6 @@ class BooksController < ApplicationController
         a.favorited_users.includes(:favorites).where(created_at: from...to).size
       }
     @nbook = Book.new
-    # @books = Book.all
-    # @books = Book.includes(:favorited_users).where(created_at: from...to).sort {|a,b| b.favorited_users.size <=>
-    # a.favorited_users.size}
     @post_comment = PostComment.new
   end
 
