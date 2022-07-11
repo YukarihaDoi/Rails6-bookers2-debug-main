@@ -1,11 +1,12 @@
 class BooksController < ApplicationController
-
+impressionist :actions => [:show]
 # 詳細画面
   def show
    @nbook = Book.new
    @book = Book.find(params[:id])
    @post_comment = PostComment.new
    @user = @book.user
+   impressionist(@book, nil, unique: [:session_hash])
   end
 
 # 投稿一覧
