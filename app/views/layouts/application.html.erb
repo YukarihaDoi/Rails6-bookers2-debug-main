@@ -12,14 +12,15 @@
   </head>
 
   <body>
+  <!--部分テンプレート_headerを読み込む-->
   <%= render 'layouts/header' %>
 
       <main>
         <p id="notice"><%= notice %></p>
-        
-         <%= yield %>
+  <!--受け取ったブロック引数を展開する-->
+        <%= yield %>
       </main>
-
+  <!--部分テンプレート_footerを読み込む-->
     <%= render 'layouts/footer' %>
   </body>
 </html>

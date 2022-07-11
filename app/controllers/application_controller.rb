@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+ protected
 
-  protected
-
+# devise.rbをemailからnameにした為、emailは許可が必要になる
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
   end

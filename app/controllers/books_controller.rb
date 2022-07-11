@@ -7,6 +7,7 @@ class BooksController < ApplicationController
    @post_comment = PostComment.new
    @user = @book.user
   end
+
 # 投稿一覧
   def index
     to  = Time.current.at_end_of_day
